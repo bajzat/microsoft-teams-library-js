@@ -55,6 +55,8 @@ export namespace authentication {
         }
       };
     } else {
+      console.log(authenticateParams);
+      console.log('authenticate');
       // Open an authentication window with the parameters provided by the caller.
       openAuthenticationWindow(authenticateParams);
     }
@@ -113,6 +115,7 @@ export namespace authentication {
   }
 
   function openAuthenticationWindow(authenticateParameters: AuthenticateParameters): void {
+    console.log('open window1');
     authParams = authenticateParameters;
     // Close the previously opened window if we have one
     closeAuthenticationWindow();
@@ -125,6 +128,7 @@ export namespace authentication {
     // Convert any relative URLs into absolute URLs before sending them over to the parent window
     const link = document.createElement('a');
     link.href = authParams.url;
+    console.log('open window2');
     // We are running in the browser, so we need to center the new window ourselves
     let left: number =
       typeof GlobalVars.currentWindow.screenLeft !== 'undefined'
@@ -149,12 +153,16 @@ export namespace authentication {
         ', height=' +
         height,
     );
+    console.log('open window3');
     if (GlobalVars.childWindow) {
       // Start monitoring the authentication window so that we can detect if it gets closed before the flow completes
+      console.log('open success');
       startAuthenticationWindowMonitor();
     } else {
       // If we failed to open the window, fail the authentication flow
+      console.log('open fail');
       handleFailure('FailedToOpenWindow');
+
     }
   }
 
