@@ -162,7 +162,6 @@ export namespace authentication {
       // If we failed to open the window, fail the authentication flow
       console.log('open fail');
       handleFailure('FailedToOpenWindow');
-
     }
   }
 
